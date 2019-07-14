@@ -1,4 +1,4 @@
-package radix
+package radixset
 
 import (
 	"bytes"
@@ -103,13 +103,13 @@ func (e edges) Sort() {
 // ordered iteration,
 type Tree struct {
 	root *node
-	rw *sync.RWMutex
+	rw   *sync.RWMutex
 	size int
 }
 
 // New returns an empty Tree
 func New() *Tree {
-	return &Tree{root: &node{},rw:new(sync.RWMutex)}
+	return &Tree{root: &node{}, rw: new(sync.RWMutex)}
 }
 
 // Len is used to return the number of elements in the tree
@@ -135,7 +135,7 @@ func longestPrefix(k1, k2 []byte) int {
 
 // Add is used to add a newentry or update
 // an existing entry. Returns if updated.
-func (t *Tree) Add(s []byte)  bool {
+func (t *Tree) Add(s []byte) bool {
 	t.rw.Lock()
 	defer t.rw.Unlock()
 	var parent *node
@@ -145,14 +145,14 @@ func (t *Tree) Add(s []byte)  bool {
 		// Handle key exhaution
 		if len(search) == 0 {
 			if n.isLeaf() {
-				return  true
+				return true
 			}
 
 			n.leaf = &leafNode{
 				key: s,
 			}
 			t.size++
-			return  false
+			return false
 		}
 
 		// Look for the edge
@@ -330,7 +330,7 @@ func (t *Tree) deletePrefix(parent, n *node, prefix []byte) int {
 func (n *node) mergeChild() {
 	e := n.edges[0]
 	child := e.node
-	n.prefix = append(n.prefix , child.prefix...)
+	n.prefix = append(n.prefix, child.prefix...)
 	n.leaf = child.leaf
 	n.edges = child.edges
 }
@@ -402,11 +402,10 @@ func (t *Tree) LongestPrefix(s []byte) ([]byte, bool) {
 		}
 	}
 	if last != nil {
-		return last.key,  true
+		return last.key, true
 	}
 	return []byte{}, false
 }
-
 
 // Walk is used to walk the tree
 func (t *Tree) Walk(fn WalkFn) {

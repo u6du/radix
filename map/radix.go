@@ -1,4 +1,4 @@
-package radix
+package radixmap
 
 import (
 	"bytes"
@@ -104,13 +104,13 @@ func (e edges) Sort() {
 // ordered iteration,
 type Tree struct {
 	root *node
-	rw *sync.RWMutex
+	rw   *sync.RWMutex
 	size int
 }
 
 // New returns an empty Tree
 func New() *Tree {
-	return &Tree{root: &node{},rw:new(sync.RWMutex)}
+	return &Tree{root: &node{}, rw: new(sync.RWMutex)}
 }
 
 // Len is used to return the number of elements in the tree
@@ -337,7 +337,7 @@ func (t *Tree) deletePrefix(parent, n *node, prefix []byte) int {
 func (n *node) mergeChild() {
 	e := n.edges[0]
 	child := e.node
-	n.prefix = append(n.prefix , child.prefix...)
+	n.prefix = append(n.prefix, child.prefix...)
 	n.leaf = child.leaf
 	n.edges = child.edges
 }
@@ -413,7 +413,6 @@ func (t *Tree) LongestPrefix(s []byte) ([]byte, interface{}, bool) {
 	}
 	return []byte{}, nil, false
 }
-
 
 // Walk is used to walk the tree
 func (t *Tree) Walk(fn WalkFn) {
