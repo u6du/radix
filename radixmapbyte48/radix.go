@@ -108,7 +108,7 @@ func (e edges) Sort() {
 type Tree struct {
 	root *node
 	rw   *sync.RWMutex
-	size int
+	size uint
 }
 
 // New returns an empty Tree
@@ -117,18 +117,18 @@ func New() *Tree {
 }
 
 // Len is used to return the number of elements in the tree
-func (t *Tree) Len() int {
+func (t *Tree) Len() uint {
 	return t.size
 }
 
 // longestPrefix finds the length of the shared prefix
 // of two bytes
-func longestPrefix(k1, k2 []byte) int {
-	max := len(k1)
-	if l := len(k2); l < max {
+func longestPrefix(k1, k2 []byte) uint {
+	max := uint(len(k1))
+	if l := uint(len(k2)); l < max {
 		max = l
 	}
-	var i int
+	var i uint
 	for i = 0; i < max; i++ {
 		if k1[i] != k2[i] {
 			break
@@ -185,7 +185,7 @@ func (t *Tree) Add(s []byte, v [48]byte) ([48]byte, bool) {
 
 		// Determine longest prefix of the search key on match
 		commonPrefix := longestPrefix(search, n.prefix)
-		if commonPrefix == len(n.prefix) {
+		if commonPrefix == uint(len(n.prefix)) {
 			search = search[commonPrefix:]
 			continue
 		}
@@ -291,18 +291,18 @@ DELETE:
 // DeletePrefix is used to delete the subtree under a prefix
 // Returns how many nodes were deleted
 // Use this to delete large subtrees efficiently
-func (t *Tree) DeletePrefix(s []byte) int {
+func (t *Tree) DeletePrefix(s []byte) uint {
 	t.rw.Lock()
 	defer t.rw.Unlock()
 	return t.deletePrefix(nil, t.root, s)
 }
 
 // delete does a recursive deletion
-func (t *Tree) deletePrefix(parent, n *node, prefix []byte) int {
+func (t *Tree) deletePrefix(parent, n *node, prefix []byte) uint {
 	// Check for key exhaustion
 	if len(prefix) == 0 {
 		// Remove the leaf node
-		subTreeSize := 0
+		subTreeSize := uint(0)
 		//recursively walk from all edges of the node to be deleted
 		recursiveWalk(n, func(s []byte, v [48]byte) bool {
 			subTreeSize++
