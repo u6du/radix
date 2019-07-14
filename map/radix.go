@@ -1,18 +1,18 @@
 package radix
 
 import (
+	"bytes"
 	"sort"
-	"strings"
 )
 
 // WalkFn is used when walking the tree. Takes a
 // key and value, returning if iteration should
 // be terminated.
-type WalkFn func(s string, v interface{}) bool
+type WalkFn func(s []byte, v interface{}) bool
 
 // leafNode is used to represent a value
 type leafNode struct {
-	key string
+	key []byte
 	val interface{}
 }
 
@@ -27,7 +27,7 @@ type node struct {
 	leaf *leafNode
 
 	// prefix is the common prefix we ignore
-	prefix string
+	prefix []byte
 
 	// Edges should be stored in-order for iteration.
 	// We avoid a fully materialized slice to save memory,
@@ -108,17 +108,7 @@ type Tree struct {
 
 // New returns an empty Tree
 func New() *Tree {
-	return NewFromMap(nil)
-}
-
-// NewFromMap returns a new tree containing the keys
-// from an existing map
-func NewFromMap(m map[string]interface{}) *Tree {
-	t := &Tree{root: &node{}}
-	for k, v := range m {
-		t.Insert(k, v)
-	}
-	return t
+	return &Tree{root: &node{}}
 }
 
 // Len is used to return the number of elements in the tree
@@ -127,8 +117,8 @@ func (t *Tree) Len() int {
 }
 
 // longestPrefix finds the length of the shared prefix
-// of two strings
-func longestPrefix(k1, k2 string) int {
+// of two bytes
+func longestPrefix(k1, k2 []byte) int {
 	max := len(k1)
 	if l := len(k2); l < max {
 		max = l
@@ -144,7 +134,7 @@ func longestPrefix(k1, k2 string) int {
 
 // Insert is used to add a newentry or update
 // an existing entry. Returns if updated.
-func (t *Tree) Insert(s string, v interface{}) (interface{}, bool) {
+func (t *Tree) Insert(s []byte, v interface{}) (interface{}, bool) {
 	var parent *node
 	n := t.root
 	search := s
@@ -234,7 +224,7 @@ func (t *Tree) Insert(s string, v interface{}) (interface{}, bool) {
 
 // Delete is used to delete a key, returning the previous
 // value and if it was deleted
-func (t *Tree) Delete(s string) (interface{}, bool) {
+func (t *Tree) Delete(s []byte) (interface{}, bool) {
 	var parent *node
 	var label byte
 	n := t.root
@@ -257,7 +247,7 @@ func (t *Tree) Delete(s string) (interface{}, bool) {
 		}
 
 		// Consume the search prefix
-		if strings.HasPrefix(search, n.prefix) {
+		if bytes.HasPrefix(search, n.prefix) {
 			search = search[len(n.prefix):]
 		} else {
 			break
@@ -292,18 +282,18 @@ DELETE:
 // DeletePrefix is used to delete the subtree under a prefix
 // Returns how many nodes were deleted
 // Use this to delete large subtrees efficiently
-func (t *Tree) DeletePrefix(s string) int {
+func (t *Tree) DeletePrefix(s []byte) int {
 	return t.deletePrefix(nil, t.root, s)
 }
 
 // delete does a recursive deletion
-func (t *Tree) deletePrefix(parent, n *node, prefix string) int {
+func (t *Tree) deletePrefix(parent, n *node, prefix []byte) int {
 	// Check for key exhaustion
 	if len(prefix) == 0 {
 		// Remove the leaf node
 		subTreeSize := 0
 		//recursively walk from all edges of the node to be deleted
-		recursiveWalk(n, func(s string, v interface{}) bool {
+		recursiveWalk(n, func(s []byte, v interface{}) bool {
 			subTreeSize++
 			return false
 		})
@@ -323,7 +313,7 @@ func (t *Tree) deletePrefix(parent, n *node, prefix string) int {
 	// Look for an edge
 	label := prefix[0]
 	child := n.getEdge(label)
-	if child == nil || (!strings.HasPrefix(child.prefix, prefix) && !strings.HasPrefix(prefix, child.prefix)) {
+	if child == nil || (!bytes.HasPrefix(child.prefix, prefix) && !bytes.HasPrefix(prefix, child.prefix)) {
 		return 0
 	}
 
@@ -339,14 +329,14 @@ func (t *Tree) deletePrefix(parent, n *node, prefix string) int {
 func (n *node) mergeChild() {
 	e := n.edges[0]
 	child := e.node
-	n.prefix = n.prefix + child.prefix
+	n.prefix = append(n.prefix , child.prefix...)
 	n.leaf = child.leaf
 	n.edges = child.edges
 }
 
 // Get is used to lookup a specific key, returning
 // the value and if it was found
-func (t *Tree) Get(s string) (interface{}, bool) {
+func (t *Tree) Get(s []byte) (interface{}, bool) {
 	n := t.root
 	search := s
 	for {
@@ -365,7 +355,7 @@ func (t *Tree) Get(s string) (interface{}, bool) {
 		}
 
 		// Consume the search prefix
-		if strings.HasPrefix(search, n.prefix) {
+		if bytes.HasPrefix(search, n.prefix) {
 			search = search[len(n.prefix):]
 		} else {
 			break
@@ -376,7 +366,7 @@ func (t *Tree) Get(s string) (interface{}, bool) {
 
 // LongestPrefix is like Get, but instead of an
 // exact match, it will return the longest prefix match.
-func (t *Tree) LongestPrefix(s string) (string, interface{}, bool) {
+func (t *Tree) LongestPrefix(s []byte) ([]byte, interface{}, bool) {
 	var last *leafNode
 	n := t.root
 	search := s
@@ -398,7 +388,7 @@ func (t *Tree) LongestPrefix(s string) (string, interface{}, bool) {
 		}
 
 		// Consume the search prefix
-		if strings.HasPrefix(search, n.prefix) {
+		if bytes.HasPrefix(search, n.prefix) {
 			search = search[len(n.prefix):]
 		} else {
 			break
@@ -407,11 +397,11 @@ func (t *Tree) LongestPrefix(s string) (string, interface{}, bool) {
 	if last != nil {
 		return last.key, last.val, true
 	}
-	return "", nil, false
+	return []byte{}, nil, false
 }
 
 // Minimum is used to return the minimum value in the tree
-func (t *Tree) Minimum() (string, interface{}, bool) {
+func (t *Tree) Minimum() ([]byte, interface{}, bool) {
 	n := t.root
 	for {
 		if n.isLeaf() {
@@ -423,11 +413,11 @@ func (t *Tree) Minimum() (string, interface{}, bool) {
 			break
 		}
 	}
-	return "", nil, false
+	return []byte{}, nil, false
 }
 
 // Maximum is used to return the maximum value in the tree
-func (t *Tree) Maximum() (string, interface{}, bool) {
+func (t *Tree) Maximum() ([]byte, interface{}, bool) {
 	n := t.root
 	for {
 		if num := len(n.edges); num > 0 {
@@ -439,7 +429,7 @@ func (t *Tree) Maximum() (string, interface{}, bool) {
 		}
 		break
 	}
-	return "", nil, false
+	return []byte{}, nil, false
 }
 
 // Walk is used to walk the tree
@@ -448,7 +438,7 @@ func (t *Tree) Walk(fn WalkFn) {
 }
 
 // WalkPrefix is used to walk the tree under a prefix
-func (t *Tree) WalkPrefix(prefix string, fn WalkFn) {
+func (t *Tree) WalkPrefix(prefix []byte, fn WalkFn) {
 	n := t.root
 	search := prefix
 	for {
@@ -465,10 +455,10 @@ func (t *Tree) WalkPrefix(prefix string, fn WalkFn) {
 		}
 
 		// Consume the search prefix
-		if strings.HasPrefix(search, n.prefix) {
+		if bytes.HasPrefix(search, n.prefix) {
 			search = search[len(n.prefix):]
 
-		} else if strings.HasPrefix(n.prefix, search) {
+		} else if bytes.HasPrefix(n.prefix, search) {
 			// Child may be under our search prefix
 			recursiveWalk(n, fn)
 			return
@@ -483,7 +473,7 @@ func (t *Tree) WalkPrefix(prefix string, fn WalkFn) {
 // from the root down to a given leaf. Where WalkPrefix walks
 // all the entries *under* the given prefix, this walks the
 // entries *above* the given prefix.
-func (t *Tree) WalkPath(path string, fn WalkFn) {
+func (t *Tree) WalkPath(path []byte, fn WalkFn) {
 	n := t.root
 	search := path
 	for {
@@ -504,7 +494,7 @@ func (t *Tree) WalkPath(path string, fn WalkFn) {
 		}
 
 		// Consume the search prefix
-		if strings.HasPrefix(search, n.prefix) {
+		if bytes.HasPrefix(search, n.prefix) {
 			search = search[len(n.prefix):]
 		} else {
 			break
@@ -527,14 +517,4 @@ func recursiveWalk(n *node, fn WalkFn) bool {
 		}
 	}
 	return false
-}
-
-// ToMap is used to walk the tree and convert it into a map
-func (t *Tree) ToMap() map[string]interface{} {
-	out := make(map[string]interface{}, t.size)
-	t.Walk(func(k string, v interface{}) bool {
-		out[k] = v
-		return false
-	})
-	return out
 }
