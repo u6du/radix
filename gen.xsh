@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env xonsh 
 
 import re
 import configparser
@@ -64,3 +64,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+    cd @(PATH.ROOT)
+    goimports -w .

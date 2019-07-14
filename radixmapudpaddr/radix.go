@@ -2,6 +2,7 @@ package radixmapudpaddr
 
 import (
 	"bytes"
+	"net"
 	"sort"
 	"sync"
 )

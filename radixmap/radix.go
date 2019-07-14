@@ -6,9 +6,6 @@ import (
 	"sync"
 )
 
-
-
-
 // WalkFn is used when walking the tree. Takes a
 // key and value, returning if iteration should
 // be terminated.
@@ -428,18 +425,18 @@ func (t *Tree) Walk(fn WalkFn) {
 
 func (t *Tree) DeleteIf(fn WalkFn) {
 	li := t.FilterKey(fn)
-	for i := range li{
+	for i := range li {
 		t.Delete(li[i])
 	}
 }
 
-func (t *Tree) FilterKey(fn WalkFn) (li [][]byte){
+func (t *Tree) FilterKey(fn WalkFn) (li [][]byte) {
 
 	t.rw.RLock()
 	defer t.rw.RUnlock()
 
 	recursiveWalk(t.root, func(s []byte, v interface{}) bool {
-		if fn(s,v){
+		if fn(s, v) {
 			li = append(li, s)
 		}
 		return true

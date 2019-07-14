@@ -5,9 +5,9 @@ import (
 )
 
 func TestRadix(t *testing.T) {
-	r:=New()
+	r := New()
 	key := []byte("test")
-	r.Add(key,1)
+	r.Add(key, 1)
 
 	val, ok := r.Get(key)
 	t.Logf("%s %d %t", key, val, ok)
