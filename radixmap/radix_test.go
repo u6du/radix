@@ -1,4 +1,4 @@
-package radix
+package radixmap
 
 import (
 	"testing"
