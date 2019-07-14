@@ -426,6 +426,27 @@ func (t *Tree) Walk(fn WalkFn) {
 	recursiveWalk(t.root, fn)
 }
 
+func (t *Tree) DeleteIf(fn WalkFn) {
+	li := t.FilterKey(fn)
+	for i := range li{
+		t.Delete(li[i])
+	}
+}
+
+func (t *Tree) FilterKey(fn WalkFn) (li [][]byte){
+
+	t.rw.RLock()
+	defer t.rw.RUnlock()
+
+	recursiveWalk(t.root, func(s []byte, v [32]byte) bool {
+		if fn(s,v){
+			li = append(li, s)
+		}
+		return true
+	})
+	return
+}
+
 // WalkPrefix is used to walk the tree under a prefix
 func (t *Tree) WalkPrefix(prefix []byte, fn WalkFn) {
 

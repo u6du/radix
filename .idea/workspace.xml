@@ -4,11 +4,6 @@
     <list default="true" id="09208c02-ebef-43b0-bfa8-2f477b4bdbb6" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_template/radixmap/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/_template/radixmap/radix.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/radixmap/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmap/radix.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/radixmapbyte/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapbyte/radix.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/radixmapbyte32/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapbyte32/radix.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/radixmapbyte48/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapbyte48/radix.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/radixmapuint64/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapuint64/radix.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,22 +37,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/radixmapbyte48/radix.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="671">
+            <state relative-caret-position="5565">
               <caret line="375" column="5" selection-start-line="375" selection-start-column="5" selection-end-line="375" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/_template/radixmap/radix.ini">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_template/radixmap/radix.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="296" column="41" lean-forward="true" selection-start-line="296" selection-start-column="41" selection-end-line="296" selection-end-column="41" />
+            <state relative-caret-position="267">
+              <caret line="431" column="23" lean-forward="true" selection-start-line="431" selection-start-column="23" selection-end-line="431" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -90,6 +80,11 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/radixmap/radix.go">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/go.mod">
           <provider selected="true" editor-type-id="text-editor">
             <state>
@@ -107,6 +102,7 @@
       <find>s</find>
       <find>([]byte, interface{}, bool)</find>
       <find>nil</find>
+      <find>subTreeSize</find>
     </findStrings>
     <replaceStrings>
       <replace>byte</replace>
@@ -147,6 +143,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -189,7 +186,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -287,11 +283,11 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="0" y="23" width="1440" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4939759" visible="true" weight="0.2639485" />
-      <window_info id="Structure" order="1" sideWeight="0.5060241" side_tool="true" visible="true" weight="0.2639485" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49318463" visible="true" weight="0.26752505" />
+      <window_info id="Structure" order="1" sideWeight="0.5068154" side_tool="true" visible="true" weight="0.26752505" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
@@ -332,6 +328,9 @@
     <entry file="file://$PROJECT_DIR$/map/radix_test.go" />
     <entry file="file://$PROJECT_DIR$/set/radix.go" />
     <entry file="file://$PROJECT_DIR$/set/radix_test.go" />
+    <entry file="file://$PROJECT_DIR$/_template/radixmap/radix.ini">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -346,6 +345,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7320">
           <caret line="492" column="18" selection-start-line="492" selection-start-column="18" selection-end-line="492" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/radixmapbyte48/radix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5565">
+          <caret line="375" column="5" selection-start-line="375" selection-start-column="5" selection-end-line="375" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -370,6 +376,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/radixmap/radix.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/go.mod">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -377,20 +386,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/radixmapbyte48/radix.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="671">
-          <caret line="375" column="5" selection-start-line="375" selection-start-column="5" selection-end-line="375" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_template/radixmap/radix.ini">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/_template/radixmap/radix.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="296" column="41" lean-forward="true" selection-start-line="296" selection-start-column="41" selection-end-line="296" selection-end-column="41" />
+        <state relative-caret-position="267">
+          <caret line="431" column="23" lean-forward="true" selection-start-line="431" selection-start-column="23" selection-end-line="431" selection-end-column="23" />
         </state>
       </provider>
     </entry>
