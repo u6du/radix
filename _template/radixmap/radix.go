@@ -6,17 +6,17 @@ import (
 	"sync"
 )
 
-
+type Interface interface{}
 
 // WalkFn is used when walking the tree. Takes a
 // key and value, returning if iteration should
 // be terminated.
-type WalkFn func(s []byte, v interface{}) bool
+type WalkFn func(s []byte, v Interface) bool
 
 // leafNode is used to represent a value
 type leafNode struct {
 	key []byte
-	val interface{}
+	val Interface
 }
 
 // edge is used to represent an edge node
@@ -138,7 +138,7 @@ func longestPrefix(k1, k2 []byte) int {
 
 // Add is used to add a newentry or update
 // an existing entry. Returns if updated.
-func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
+func (t *Tree) Add(s []byte, v Interface) (Interface, bool) {
 	t.rw.Lock()
 	defer t.rw.Unlock()
 	var parent *node
@@ -230,7 +230,7 @@ func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
 
 // Delete is used to delete a key, returning the previous
 // value and if it was deleted
-func (t *Tree) Delete(s []byte) (interface{}, bool) {
+func (t *Tree) Delete(s []byte) (Interface, bool) {
 	t.rw.Lock()
 	defer t.rw.Unlock()
 	var parent *node
@@ -303,7 +303,7 @@ func (t *Tree) deletePrefix(parent, n *node, prefix []byte) int {
 		// Remove the leaf node
 		subTreeSize := 0
 		//recursively walk from all edges of the node to be deleted
-		recursiveWalk(n, func(s []byte, v interface{}) bool {
+		recursiveWalk(n, func(s []byte, v Interface) bool {
 			subTreeSize++
 			return false
 		})
@@ -346,7 +346,7 @@ func (n *node) mergeChild() {
 
 // Get is used to lookup a specific key, returning
 // the value and if it was found
-func (t *Tree) Get(s []byte) (interface{}, bool) {
+func (t *Tree) Get(s []byte) (Interface, bool) {
 	t.rw.RLock()
 	defer t.rw.RUnlock()
 	n := t.root
@@ -378,7 +378,7 @@ func (t *Tree) Get(s []byte) (interface{}, bool) {
 
 // LongestPrefix is like Get, but instead of an
 // exact match, it will return the longest prefix match.
-func (t *Tree) LongestPrefix(s []byte) ([]byte, interface{}, bool) {
+func (t *Tree) LongestPrefix(s []byte) ([]byte, Interface, bool) {
 
 	t.rw.RLock()
 	defer t.rw.RUnlock()

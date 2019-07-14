@@ -46,16 +46,16 @@ def gen(filepath, filename, li, txt):
 def main():
     for dirpath, _, file_li in walk(PATH.TEMPLATE):
         for filename in file_li:
-            if filename.endswith(".toml"):
+            if filename.endswith(".ini"):
                 filepath = join(dirpath,filename)
                 config.read(filepath)
-                gopath = join(dirpath, filename[:-5]+".go")
+                gopath = join(dirpath, filename[:-4]+".go")
                 with open(gopath) as f:
                     txt = f.read()
 
                 for filename, li in config.items():
                     if len(li):
-                        gen(gopath, filename, li, txt)
+                        gen(gopath, filename.strip(), li, txt)
 
 if __name__ == "__main__":
     main()
