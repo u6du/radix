@@ -25,9 +25,14 @@ def gen(filepath, filename, li, txt):
             txt[pos] = "package %s%s"%(package, filename)
 
         for k,v in kv.items():
-            if "type %s "%k in line:
+            r = False
+            if "var %s "%k in line:
+                r = re.compile(r"\b%s\b"%k)
+            elif "type %s "%k in line:
                 r = re.compile(r"([\[\*\(\s\]])%s\b"%k)
-                kname[r] = r"\1"+v
+                v = r"\1"+v
+            if r:
+                kname[r] = v
                 txt[pos] = ""
                 del kv[k]
                 break

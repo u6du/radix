@@ -7,6 +7,7 @@ import (
 )
 
 type Interface interface{}
+var Nil Interface = nil
 
 // WalkFn is used when walking the tree. Takes a
 // key and value, returning if iteration should
@@ -158,7 +159,7 @@ func (t *Tree) Add(s []byte, v Interface) (Interface, bool) {
 				val: v,
 			}
 			t.size++
-			return nil, false
+			return Nil, false
 		}
 
 		// Look for the edge
@@ -179,7 +180,7 @@ func (t *Tree) Add(s []byte, v Interface) (Interface, bool) {
 			}
 			parent.addEdge(e)
 			t.size++
-			return nil, false
+			return Nil, false
 		}
 
 		// Determine longest prefix of the search key on match
@@ -213,7 +214,7 @@ func (t *Tree) Add(s []byte, v Interface) (Interface, bool) {
 		search = search[commonPrefix:]
 		if len(search) == 0 {
 			child.leaf = leaf
-			return nil, false
+			return Nil, false
 		}
 
 		// Create a new edge for the node
@@ -224,7 +225,7 @@ func (t *Tree) Add(s []byte, v Interface) (Interface, bool) {
 				prefix: search,
 			},
 		})
-		return nil, false
+		return Nil, false
 	}
 }
 
@@ -261,7 +262,7 @@ func (t *Tree) Delete(s []byte) (Interface, bool) {
 			break
 		}
 	}
-	return nil, false
+	return Nil, false
 
 DELETE:
 	// Delete the leaf
@@ -373,7 +374,7 @@ func (t *Tree) Get(s []byte) (Interface, bool) {
 			break
 		}
 	}
-	return nil, false
+	return Nil, false
 }
 
 // LongestPrefix is like Get, but instead of an
@@ -413,7 +414,7 @@ func (t *Tree) LongestPrefix(s []byte) ([]byte, Interface, bool) {
 	if last != nil {
 		return last.key, last.val, true
 	}
-	return []byte{}, nil, false
+	return []byte{}, Nil, false
 }
 
 // Walk is used to walk the tree

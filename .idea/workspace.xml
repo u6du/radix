@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09208c02-ebef-43b0-bfa8-2f477b4bdbb6" name="默认更改列表" comment="">
+      <change beforePath="$PROJECT_DIR$/_template/radixmap/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/_template/radixmap/radix.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_template/radixmap/radix.ini" beforeDir="false" afterPath="$PROJECT_DIR$/_template/radixmap/radix.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/radixmap/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmap/radix.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/radixmapbyte/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapbyte/radix.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/radixmapbyte32/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapbyte32/radix.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/radixmapbyte48/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapbyte48/radix.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/radixmapuint64/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/radixmapuint64/radix.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -24,11 +31,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/radixmapuint64/radix.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="263" column="12" selection-start-line="263" selection-start-column="12" selection-end-line="263" selection-end-column="12" />
+            <state relative-caret-position="333">
+              <caret line="492" column="18" lean-forward="true" selection-start-line="492" selection-start-column="18" selection-end-line="492" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/radixmapbyte48/radix.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="671">
+              <caret line="375" column="5" lean-forward="true" selection-start-line="375" selection-start-column="5" selection-end-line="375" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/_template/radixmap/radix.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-850">
+              <caret line="416" column="24" selection-start-line="416" selection-start-column="24" selection-end-line="416" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -103,6 +128,7 @@
         <option value="$PROJECT_DIR$/radixset/radix_test.go" />
         <option value="$PROJECT_DIR$/radixmap/radix_test.go" />
         <option value="$PROJECT_DIR$/radixmapuint64/radix.go" />
+        <option value="$PROJECT_DIR$/_template/radixmap/radix.go" />
       </list>
     </option>
   </component>
@@ -126,7 +152,23 @@
             <path>
               <item name="radix" type="b2602c69:ProjectViewProjectNode" />
               <item name="radix" type="462c0819:PsiDirectoryNode" />
+              <item name="_template" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="radix" type="b2602c69:ProjectViewProjectNode" />
+              <item name="radix" type="462c0819:PsiDirectoryNode" />
+              <item name="_template" type="462c0819:PsiDirectoryNode" />
               <item name="radixmap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="radix" type="b2602c69:ProjectViewProjectNode" />
+              <item name="radix" type="462c0819:PsiDirectoryNode" />
+              <item name="radixmap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="radix" type="b2602c69:ProjectViewProjectNode" />
+              <item name="radix" type="462c0819:PsiDirectoryNode" />
+              <item name="radixmapbyte48" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="radix" type="b2602c69:ProjectViewProjectNode" />
@@ -323,10 +365,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/_template/radixmap/radix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-850">
+          <caret line="416" column="24" selection-start-line="416" selection-start-column="24" selection-end-line="416" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/radixmapuint64/radix.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="263" column="12" selection-start-line="263" selection-start-column="12" selection-end-line="263" selection-end-column="12" />
+        <state relative-caret-position="333">
+          <caret line="492" column="18" lean-forward="true" selection-start-line="492" selection-start-column="18" selection-end-line="492" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/radixmapbyte48/radix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="671">
+          <caret line="375" column="5" lean-forward="true" selection-start-line="375" selection-start-column="5" selection-end-line="375" selection-end-column="5" />
         </state>
       </provider>
     </entry>
