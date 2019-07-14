@@ -21,4 +21,6 @@ func TestRadix(t *testing.T) {
 		t.Logf("%s", s)
 		return true
 	})
+	r.Add([]byte("t2"))
+	t.Logf("len %d",r.Len())
 }
