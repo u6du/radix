@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="09208c02-ebef-43b0-bfa8-2f477b4bdbb6" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/map/radix.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map/radix_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/map/radix_test.go" afterDir="false" />
-    </list>
+    <list default="true" id="09208c02-ebef-43b0-bfa8-2f477b4bdbb6" name="默认更改列表" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +23,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/map/radix_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="315">
+              <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -169,9 +165,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="go_test_radix - 2019.07.14 at 10h 15m 59s.xml">
-      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="go_test_radix - 2019.07.14 at 10h 16m 15s.xml">
       <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -197,6 +190,9 @@
       <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
     </history-entry>
     <history-entry file="go_test_radix - 2019.07.14 at 10h 18m 27s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 21m 03s.xml">
       <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
@@ -275,8 +271,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/map/radix_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="315">
+          <caret line="23" column="1" lean-forward="true" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
         </state>
       </provider>
     </entry>
