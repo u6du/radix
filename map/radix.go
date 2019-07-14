@@ -132,9 +132,9 @@ func longestPrefix(k1, k2 []byte) int {
 	return i
 }
 
-// Insert is used to add a newentry or update
+// Add is used to add a newentry or update
 // an existing entry. Returns if updated.
-func (t *Tree) Insert(s []byte, v interface{}) (interface{}, bool) {
+func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
 	var parent *node
 	n := t.root
 	search := s

@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09208c02-ebef-43b0-bfa8-2f477b4bdbb6" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/radix.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_template/set/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_template/set/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_template/set/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/set/radix.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_template/set/radix_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/set/radix_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/radix.go" beforeDir="false" afterPath="$PROJECT_DIR$/map/radix.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map/radix_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/map/radix_test.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,22 +15,38 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/set/radix.go">
+        <entry file="file://$PROJECT_DIR$/main.go">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/go.mod">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/map/radix_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="14" column="14" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="14" />
-              <folding>
-                <element signature="e#15#42#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="285">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/set/radix_test.go">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/map/radix.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+            <state relative-caret-position="252">
+              <caret line="388" selection-start-line="388" selection-end-line="388" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file:///usr/local/opt/go/libexec/src/builtin/builtin.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="104" column="14" selection-start-line="104" selection-start-column="3" selection-end-line="104" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -47,6 +56,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>string</find>
+      <find>Insert</find>
     </findStrings>
     <replaceStrings>
       <replace>byte</replace>
@@ -66,6 +76,8 @@
         <option value="$PROJECT_DIR$/_template/set/radix.go" />
         <option value="$PROJECT_DIR$/set/radix.go" />
         <option value="$PROJECT_DIR$/set/radix_test.go" />
+        <option value="$PROJECT_DIR$/map/radix.go" />
+        <option value="$PROJECT_DIR$/map/radix_test.go" />
       </list>
     </option>
   </component>
@@ -89,7 +101,7 @@
             <path>
               <item name="radix" type="b2602c69:ProjectViewProjectNode" />
               <item name="radix" type="462c0819:PsiDirectoryNode" />
-              <item name="set" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -125,21 +137,85 @@
       </list>
     </option>
   </component>
+  <component name="RunManager" selected="Go Test.go test radix">
+    <configuration name="TestRadix in radix_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="radix" />
+      <working_directory value="$PROJECT_DIR$/map" />
+      <framework value="gotest" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/map/radix_test.go" />
+      <pattern value="^TestRadix$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test radix" type="GoTestRunConfiguration" factoryName="Go Test" nameIsGenerated="true">
+      <module name="radix" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Test.go test radix" />
+      <item itemvalue="Go Test.TestRadix in radix_test.go" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestRadix in radix_test.go" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TestHistory">
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 15m 59s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 16m 15s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 16m 34s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 16m 47s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 17m 20s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 17m 34s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 18m 17s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 18m 22s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 18m 25s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_radix - 2019.07.14 at 10h 18m 27s.xml">
+      <configuration name="go test radix" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+  </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49936306" visible="true" weight="0.24964234" />
-      <window_info id="Structure" order="1" sideWeight="0.50063694" side_tool="true" visible="true" weight="0.24964234" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.24964234" />
+      <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" visible="true" weight="0.24964234" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="调试" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3299363" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -174,6 +250,33 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/opt/go/libexec/src/builtin/builtin.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="104" column="14" selection-start-line="104" selection-start-column="3" selection-end-line="104" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go.mod">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/map/radix.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="388" selection-start-line="388" selection-end-line="388" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/map/radix_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>
