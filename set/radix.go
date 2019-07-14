@@ -8,12 +8,11 @@ import (
 // WalkFn is used when walking the tree. Takes a
 // key and value, returning if iteration should
 // be terminated.
-type WalkFn func(s []byte, v interface{}) bool
+type WalkFn func(s []byte) bool
 
 // leafNode is used to represent a value
 type leafNode struct {
 	key []byte
-	val interface{}
 }
 
 // edge is used to represent an edge node
@@ -134,7 +133,7 @@ func longestPrefix(k1, k2 []byte) int {
 
 // Add is used to add a newentry or update
 // an existing entry. Returns if updated.
-func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
+func (t *Tree) Add(s []byte) bool {
 	var parent *node
 	n := t.root
 	search := s
@@ -142,17 +141,14 @@ func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
 		// Handle key exhaution
 		if len(search) == 0 {
 			if n.isLeaf() {
-				old := n.leaf.val
-				n.leaf.val = v
-				return old, true
+				return true
 			}
 
 			n.leaf = &leafNode{
 				key: s,
-				val: v,
 			}
 			t.size++
-			return nil, false
+			return false
 		}
 
 		// Look for the edge
@@ -166,14 +162,13 @@ func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
 				node: &node{
 					leaf: &leafNode{
 						key: s,
-						val: v,
 					},
 					prefix: search,
 				},
 			}
 			parent.addEdge(e)
 			t.size++
-			return nil, false
+			return false
 		}
 
 		// Determine longest prefix of the search key on match
@@ -200,14 +195,13 @@ func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
 		// Create a new leaf node
 		leaf := &leafNode{
 			key: s,
-			val: v,
 		}
 
 		// If the new key is a subset, add to to this node
 		search = search[commonPrefix:]
 		if len(search) == 0 {
 			child.leaf = leaf
-			return nil, false
+			return false
 		}
 
 		// Create a new edge for the node
@@ -218,13 +212,13 @@ func (t *Tree) Add(s []byte, v interface{}) (interface{}, bool) {
 				prefix: search,
 			},
 		})
-		return nil, false
+		return false
 	}
 }
 
 // Delete is used to delete a key, returning the previous
 // value and if it was deleted
-func (t *Tree) Delete(s []byte) (interface{}, bool) {
+func (t *Tree) Delete(s []byte) bool {
 	var parent *node
 	var label byte
 	n := t.root
@@ -253,11 +247,10 @@ func (t *Tree) Delete(s []byte) (interface{}, bool) {
 			break
 		}
 	}
-	return nil, false
+	return false
 
 DELETE:
 	// Delete the leaf
-	leaf := n.leaf
 	n.leaf = nil
 	t.size--
 
@@ -276,7 +269,7 @@ DELETE:
 		parent.mergeChild()
 	}
 
-	return leaf.val, true
+	return true
 }
 
 // DeletePrefix is used to delete the subtree under a prefix
@@ -293,7 +286,7 @@ func (t *Tree) deletePrefix(parent, n *node, prefix []byte) int {
 		// Remove the leaf node
 		subTreeSize := 0
 		//recursively walk from all edges of the node to be deleted
-		recursiveWalk(n, func(s []byte, v interface{}) bool {
+		recursiveWalk(n, func(s []byte) bool {
 			subTreeSize++
 			return false
 		})
@@ -336,14 +329,14 @@ func (n *node) mergeChild() {
 
 // Get is used to lookup a specific key, returning
 // the value and if it was found
-func (t *Tree) Get(s []byte) (interface{}, bool) {
+func (t *Tree) Get(s []byte)  bool {
 	n := t.root
 	search := s
 	for {
 		// Check for key exhaution
 		if len(search) == 0 {
 			if n.isLeaf() {
-				return n.leaf.val, true
+				return true
 			}
 			break
 		}
@@ -361,12 +354,12 @@ func (t *Tree) Get(s []byte) (interface{}, bool) {
 			break
 		}
 	}
-	return nil, false
+	return false
 }
 
 // LongestPrefix is like Get, but instead of an
 // exact match, it will return the longest prefix match.
-func (t *Tree) LongestPrefix(s []byte) ([]byte, interface{}, bool) {
+func (t *Tree) LongestPrefix(s []byte) ([]byte,  bool) {
 	var last *leafNode
 	n := t.root
 	search := s
@@ -395,17 +388,17 @@ func (t *Tree) LongestPrefix(s []byte) ([]byte, interface{}, bool) {
 		}
 	}
 	if last != nil {
-		return last.key, last.val, true
+		return last.key, true
 	}
-	return []byte{}, nil, false
+	return []byte{}, false
 }
 
 // Minimum is used to return the minimum value in the tree
-func (t *Tree) Minimum() ([]byte, interface{}, bool) {
+func (t *Tree) Minimum() ([]byte,  bool) {
 	n := t.root
 	for {
 		if n.isLeaf() {
-			return n.leaf.key, n.leaf.val, true
+			return n.leaf.key, true
 		}
 		if len(n.edges) > 0 {
 			n = n.edges[0].node
@@ -413,11 +406,11 @@ func (t *Tree) Minimum() ([]byte, interface{}, bool) {
 			break
 		}
 	}
-	return []byte{}, nil, false
+	return []byte{}, false
 }
 
 // Maximum is used to return the maximum value in the tree
-func (t *Tree) Maximum() ([]byte, interface{}, bool) {
+func (t *Tree) Maximum() ([]byte, bool) {
 	n := t.root
 	for {
 		if num := len(n.edges); num > 0 {
@@ -425,11 +418,11 @@ func (t *Tree) Maximum() ([]byte, interface{}, bool) {
 			continue
 		}
 		if n.isLeaf() {
-			return n.leaf.key, n.leaf.val, true
+			return n.leaf.key,  true
 		}
 		break
 	}
-	return []byte{}, nil, false
+	return []byte{},  false
 }
 
 // Walk is used to walk the tree
@@ -478,7 +471,7 @@ func (t *Tree) WalkPath(path []byte, fn WalkFn) {
 	search := path
 	for {
 		// Visit the leaf values if any
-		if n.leaf != nil && fn(n.leaf.key, n.leaf.val) {
+		if n.leaf != nil && fn(n.leaf.key) {
 			return
 		}
 
@@ -506,7 +499,7 @@ func (t *Tree) WalkPath(path []byte, fn WalkFn) {
 // recursively. Returns true if the walk should be aborted
 func recursiveWalk(n *node, fn WalkFn) bool {
 	// Visit the leaf values if any
-	if n.leaf != nil && fn(n.leaf.key, n.leaf.val) {
+	if n.leaf != nil && fn(n.leaf.key) {
 		return true
 	}
 

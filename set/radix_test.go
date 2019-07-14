@@ -7,18 +7,18 @@ import (
 func TestRadix(t *testing.T) {
 	r:=New()
 	key := []byte("test")
-	r.Add(key,1)
+	r.Add(key)
 
-	val, ok := r.Get(key)
-	t.Logf("%s %d %t", key, val, ok)
+	ok := r.Get(key)
+	t.Logf("%s %t", key,  ok)
 
 	key = []byte("test123")
 
-	key, val, ok = r.LongestPrefix(key)
-	t.Logf("%s %d %t", key, val, ok)
+	key,  ok = r.LongestPrefix(key)
+	t.Logf("%s %t", key, ok)
 
-	r.WalkPrefix([]byte("t"), func(s []byte, v interface{}) bool {
-		t.Logf("%s %d", s, v)
+	r.WalkPrefix([]byte("t"), func(s []byte) bool {
+		t.Logf("%s", s)
 		return true
 	})
 }
