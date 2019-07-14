@@ -3,6 +3,7 @@ package radix
 import (
 	"bytes"
 	"sort"
+	"sync"
 )
 
 // WalkFn is used when walking the tree. Takes a
@@ -102,12 +103,13 @@ func (e edges) Sort() {
 // ordered iteration,
 type Tree struct {
 	root *node
+	rw *sync.RWMutex
 	size int
 }
 
 // New returns an empty Tree
 func New() *Tree {
-	return &Tree{root: &node{}}
+	return &Tree{root: &node{},rw:new(sync.RWMutex)}
 }
 
 // Len is used to return the number of elements in the tree
@@ -133,7 +135,9 @@ func longestPrefix(k1, k2 []byte) int {
 
 // Add is used to add a newentry or update
 // an existing entry. Returns if updated.
-func (t *Tree) Add(s []byte) bool {
+func (t *Tree) Add(s []byte)  bool {
+	t.rw.Lock()
+	defer t.rw.Unlock()
 	var parent *node
 	n := t.root
 	search := s
@@ -141,14 +145,14 @@ func (t *Tree) Add(s []byte) bool {
 		// Handle key exhaution
 		if len(search) == 0 {
 			if n.isLeaf() {
-				return true
+				return  true
 			}
 
 			n.leaf = &leafNode{
 				key: s,
 			}
 			t.size++
-			return false
+			return  false
 		}
 
 		// Look for the edge
@@ -219,6 +223,8 @@ func (t *Tree) Add(s []byte) bool {
 // Delete is used to delete a key, returning the previous
 // value and if it was deleted
 func (t *Tree) Delete(s []byte) bool {
+	t.rw.Lock()
+	defer t.rw.Unlock()
 	var parent *node
 	var label byte
 	n := t.root
@@ -276,6 +282,8 @@ DELETE:
 // Returns how many nodes were deleted
 // Use this to delete large subtrees efficiently
 func (t *Tree) DeletePrefix(s []byte) int {
+	t.rw.Lock()
+	defer t.rw.Unlock()
 	return t.deletePrefix(nil, t.root, s)
 }
 
@@ -329,7 +337,9 @@ func (n *node) mergeChild() {
 
 // Get is used to lookup a specific key, returning
 // the value and if it was found
-func (t *Tree) Get(s []byte)  bool {
+func (t *Tree) Get(s []byte) bool {
+	t.rw.RLock()
+	defer t.rw.RUnlock()
 	n := t.root
 	search := s
 	for {
@@ -359,7 +369,11 @@ func (t *Tree) Get(s []byte)  bool {
 
 // LongestPrefix is like Get, but instead of an
 // exact match, it will return the longest prefix match.
-func (t *Tree) LongestPrefix(s []byte) ([]byte,  bool) {
+func (t *Tree) LongestPrefix(s []byte) ([]byte, bool) {
+
+	t.rw.RLock()
+	defer t.rw.RUnlock()
+
 	var last *leafNode
 	n := t.root
 	search := s
@@ -388,50 +402,27 @@ func (t *Tree) LongestPrefix(s []byte) ([]byte,  bool) {
 		}
 	}
 	if last != nil {
-		return last.key, true
+		return last.key,  true
 	}
 	return []byte{}, false
 }
 
-// Minimum is used to return the minimum value in the tree
-func (t *Tree) Minimum() ([]byte,  bool) {
-	n := t.root
-	for {
-		if n.isLeaf() {
-			return n.leaf.key, true
-		}
-		if len(n.edges) > 0 {
-			n = n.edges[0].node
-		} else {
-			break
-		}
-	}
-	return []byte{}, false
-}
-
-// Maximum is used to return the maximum value in the tree
-func (t *Tree) Maximum() ([]byte, bool) {
-	n := t.root
-	for {
-		if num := len(n.edges); num > 0 {
-			n = n.edges[num-1].node
-			continue
-		}
-		if n.isLeaf() {
-			return n.leaf.key,  true
-		}
-		break
-	}
-	return []byte{},  false
-}
 
 // Walk is used to walk the tree
 func (t *Tree) Walk(fn WalkFn) {
+
+	t.rw.RLock()
+	defer t.rw.RUnlock()
+
 	recursiveWalk(t.root, fn)
 }
 
 // WalkPrefix is used to walk the tree under a prefix
 func (t *Tree) WalkPrefix(prefix []byte, fn WalkFn) {
+
+	t.rw.RLock()
+	defer t.rw.RUnlock()
+
 	n := t.root
 	search := prefix
 	for {
@@ -467,6 +458,10 @@ func (t *Tree) WalkPrefix(prefix []byte, fn WalkFn) {
 // all the entries *under* the given prefix, this walks the
 // entries *above* the given prefix.
 func (t *Tree) WalkPath(path []byte, fn WalkFn) {
+
+	t.rw.RLock()
+	defer t.rw.RUnlock()
+
 	n := t.root
 	search := path
 	for {
