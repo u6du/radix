@@ -158,7 +158,7 @@ func (t *Tree) Add(s []byte, v uint64) (uint64, bool) {
 				val: v,
 			}
 			t.size++
-			return nil, false
+			return 0, false
 		}
 
 		// Look for the edge
@@ -179,7 +179,7 @@ func (t *Tree) Add(s []byte, v uint64) (uint64, bool) {
 			}
 			parent.addEdge(e)
 			t.size++
-			return nil, false
+			return 0, false
 		}
 
 		// Determine longest prefix of the search key on match
@@ -213,7 +213,7 @@ func (t *Tree) Add(s []byte, v uint64) (uint64, bool) {
 		search = search[commonPrefix:]
 		if len(search) == 0 {
 			child.leaf = leaf
-			return nil, false
+			return 0, false
 		}
 
 		// Create a new edge for the node
@@ -224,7 +224,7 @@ func (t *Tree) Add(s []byte, v uint64) (uint64, bool) {
 				prefix: search,
 			},
 		})
-		return nil, false
+		return 0, false
 	}
 }
 
@@ -261,7 +261,7 @@ func (t *Tree) Delete(s []byte) (uint64, bool) {
 			break
 		}
 	}
-	return nil, false
+	return 0, false
 
 DELETE:
 	// Delete the leaf
@@ -373,7 +373,7 @@ func (t *Tree) Get(s []byte) (uint64, bool) {
 			break
 		}
 	}
-	return nil, false
+	return 0, false
 }
 
 // LongestPrefix is like Get, but instead of an
@@ -413,7 +413,7 @@ func (t *Tree) LongestPrefix(s []byte) ([]byte, uint64, bool) {
 	if last != nil {
 		return last.key, last.val, true
 	}
-	return []byte{}, nil, false
+	return []byte{}, 0, false
 }
 
 // Walk is used to walk the tree
