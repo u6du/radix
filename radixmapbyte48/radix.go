@@ -104,13 +104,13 @@ func (e edges) Sort() {
 // ordered iteration,
 type Tree struct {
 	root *node
-	rw   *sync.RWMutex
+	rw   sync.RWMutex
 	size uint
 }
 
 // New returns an empty Tree
 func New() *Tree {
-	return &Tree{root: &node{}, rw: new(sync.RWMutex)}
+	return &Tree{root: &node{}}
 }
 
 // Len is used to return the number of elements in the tree
